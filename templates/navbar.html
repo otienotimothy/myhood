@@ -1,22 +1,23 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<!-- Navbar brand -->
-	<a class="navbar-brand mt-2 mt-lg-0" href="#">
-		<img
-			src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-			height="15"
-			alt="MDB Logo"
-			loading="lazy"
-		/>
-	</a>
 	<!-- Container wrapper -->
-	<div class="container-fluid">
+	<div class="container">
+		<!-- Navbar brand -->
+		<a class="navbar-brand mt-2 mt-lg-0" href="#">
+			<!-- <img
+				src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+				height="15"
+				alt="MDB Logo"
+				loading="lazy"
+			/> -->
+			<h1 class="fs-3">My Hood</h1>
+		</a>
 		<!-- Toggle button -->
 		<button
 			class="navbar-toggler"
 			type="button"
-			data-mdb-toggle="collapse"
-			data-mdb-target="#navbarSupportedContent"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent"
 			aria-expanded="false"
 			aria-label="Toggle navigation"
@@ -27,7 +28,7 @@
 		<!-- Collapsible wrapper -->
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<!-- Left links -->
-			<ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
+			<ul class="navbar-nav ms-auto me-3 mb-2 mb-lg-0">
 				<li class="nav-item">
 					<a class="nav-link" href="#">
 						<i class="fa-solid fa-house"></i>
@@ -40,76 +41,47 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">
-						<i class="fa-solid fa-hands-holding-diamond"></i>
+						<i class="fa-solid fa-people-group"></i>
 					</a>
 				</li>
 			</ul>
 			<!-- Left links -->
+			<!-- Right elements -->
+			<div class="d-flex align-items-center">
+				<!-- Avatar -->
+				<div class="dropdown">
+					<a
+						class="dropdown-toggle d-flex align-items-center hidden-arrow"
+						href="#"
+						id="navbarDropdownMenuAvatar"
+						role="button"
+						data-mdb-toggle="dropdown"
+						aria-expanded="false"
+					>
+						<img
+							src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+							class="rounded-circle"
+							height="25"
+							alt="Black and White Portrait of a Man"
+							loading="lazy"
+						/>
+					</a>
+					<ul
+						class="dropdown-menu dropdown-menu-end"
+						aria-labelledby="navbarDropdownMenuAvatar"
+					>
+						<li>
+							<a class="dropdown-item" href="#">My profile</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- Right elements -->
 		</div>
 		<!-- Collapsible wrapper -->
-
-		<!-- Right elements -->
-		<div class="d-flex align-items-center">
-
-			<!-- Notifications -->
-			<div class="dropdown">
-				<a
-					class="text-reset me-3 dropdown-toggle hidden-arrow"
-					href="#"
-					id="navbarDropdownMenuLink"
-					role="button"
-					data-mdb-toggle="dropdown"
-					aria-expanded="false"
-				>
-					<i class="fas fa-bell"></i>
-					<span class="badge rounded-pill badge-notification bg-danger">1</span>
-				</a>
-				<ul
-					class="dropdown-menu dropdown-menu-end"
-					aria-labelledby="navbarDropdownMenuLink"
-				>
-					<li>
-						<a class="dropdown-item" href="#">Profile</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">
-							<i class="fa-solid fa-right-from-bracket"></i> Logout
-						</a>
-					</li>
-				</ul>
-			</div>
-			<!-- Avatar -->
-			<div class="dropdown">
-				<a
-					class="dropdown-toggle d-flex align-items-center hidden-arrow"
-					href="#"
-					id="navbarDropdownMenuAvatar"
-					role="button"
-					data-mdb-toggle="dropdown"
-					aria-expanded="false"
-				>
-					<img
-						src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-						class="rounded-circle"
-						height="25"
-						alt="Black and White Portrait of a Man"
-						loading="lazy"
-					/>
-				</a>
-				<ul
-					class="dropdown-menu dropdown-menu-end"
-					aria-labelledby="navbarDropdownMenuAvatar"
-				>
-					<li>
-						<a class="dropdown-item" href="#">My profile</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">Logout</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<!-- Right elements -->
 	</div>
 	<!-- Container wrapper -->
 </nav>

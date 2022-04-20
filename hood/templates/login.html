@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!-- Section: Design Block -->
+<div class="container mt-5">
+	<section class="text-center text-lg-start">
+		<style>
+			.rounded-t-5 {
+				border-top-left-radius: 0.5rem;
+				border-top-right-radius: 0.5rem;
+			}
+
+			@media (min-width: 992px) {
+				.rounded-tr-lg-0 {
+					border-top-right-radius: 0;
+				}
+
+				.rounded-bl-lg-5 {
+					border-bottom-left-radius: 0.5rem;
+				}
+			}
+		</style>
+		<div class="card mb-3">
+			<div class="row g-0 d-flex align-items-center">
+				<div class="col-lg-4 d-none d-lg-flex">
+					<img
+						src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
+						alt="Trendy Pants and Shoes"
+						class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5"
+					/>
+				</div>
+				<div class="col-lg-8">
+					<div class="card-body py-5 px-md-5">
+						<div class="divider d-flex align-items-center my-4">
+							<p class="text-center text-primary fs-2 fw-bold mb-3">Login</p>
+						</div>
+						<form method="POST" action="">
+							{% csrf_token %}
+							<!-- Username input -->
+							<div class="form-outline mb-4">
+								<label class="form-label w-100 text-start" for="form3Example4"
+									>Username</label
+								>
+								{{form.username}}
+							</div>
+							<!-- Password input -->
+							<div class="form-outline mb-4">
+								<label class="form-label w-100 text-start" for="form3Example4"
+									>Password</label
+								>
+								{{form.password}}
+							</div>
+							<!-- Submit button -->
+							<button type="submit" class="btn btn-primary btn-block mb-4">
+								Sign in
+							</button>
+							<div class="mb-4">
+								<div class="d-flex justify-content-center">
+									<p class="text-primary d-inline-block mt-2">
+										Don't have an Account?
+									</p>
+									<a
+										href="{% url 'signup' %}"
+										class="text-danger btn btn-link me-3"
+									>
+										Signup
+									</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- Section: Design Block -->
+{% endblock %}

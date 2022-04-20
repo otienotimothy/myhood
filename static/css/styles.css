@@ -1,0 +1,6 @@
+#landingPage{
+    height: 100vh;
+    background-image: url('/static/media/bg-neighborhood.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+}

@@ -14,6 +14,11 @@ class Neighborhood(models.Model):
     creator = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     member = models.ForeignKey(User, on_delete=models.CASCADE)
 
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    postBody = models.TextField()
+    postImage = CloudinaryField('image')
+
 class Business(models.Model):
     businessName = models.CharField(max_length=100)
     businessPhone = models.CharField(max_length=255, null=True)

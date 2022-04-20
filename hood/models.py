@@ -12,7 +12,7 @@ class Neighborhood(models.Model):
     neighborhoodName = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     creator = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    member = models.ForeignKey(User, on_delete=models.CASCADE)
+    member = models.ForeignKey(User, on_delete=models.CASCADE, related_name='hoodMember')
 
 class Post(models.Model):
     title = models.CharField(max_length=200)

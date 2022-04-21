@@ -34,7 +34,7 @@ class LoginUserForm(forms.Form):
         self.fields['password'].widget.attrs['class'] = 'form-control'
 
 
-class createJoinHoodForm(forms.ModelForm):
+class CreateJoinHoodForm(forms.ModelForm):
     class Meta:
         model = Neighborhood
         fields = ['neighborhoodName', 'location']
@@ -44,7 +44,7 @@ class createJoinHoodForm(forms.ModelForm):
         }
 
 
-class createPost(forms.ModelForm):
+class CreatePost(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'postBody']
@@ -61,7 +61,7 @@ class CreateService(forms.ModelForm):
                   'serviceEmail', 'serviceDescription']
         widgets = {
             'serviceName': TextInput(attrs={'class': 'form-control'}),
-            'serviceDescription': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
+            'serviceDescription': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
             'servicePhone': TextInput(attrs={'class': 'form-control'}),
             'serviceEmail': TextInput(attrs={'class': 'form-control'}),
         }
@@ -76,5 +76,5 @@ class CreateBusiness(forms.ModelForm):
             'businessName': TextInput(attrs={'class': 'form-control'}),
             'businessPhone': TextInput(attrs={'class': 'form-control'}),
             'businessEmail': TextInput(attrs={'class': 'form-control'}),
-            'businessDescription': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'})
+            'bussinessDescription': forms.Textarea(attrs={'class': 'form-control', 'rows': 3})
         }

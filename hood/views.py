@@ -87,7 +87,9 @@ def createJoinHood(request):
     isMember = Neighborhood.objects.filter(member = request.user)
 
     if isMember:
-        return redirect(home)
+        for hood in isMember:
+            hoodName = hood.neighborhoodName
+        return redirect(home, hoodName)
     
     form = createJoinHoodForm()
     context = {'form': form, 'neighborhoods': neighborhoods}

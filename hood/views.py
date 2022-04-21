@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -5,7 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from .models import Profile, Neighborhood
-from .forms import UserRegistrationForm, LoginUserForm, createJoinHoodForm, createPost
+from .forms import CreateBusiness, CreateService, UserRegistrationForm, LoginUserForm, createJoinHoodForm, createPost
 
 # Create your views here.
 
@@ -136,3 +137,16 @@ def joinHood(request):
         userProfile.save()
         
         return redirect(home, hood= hoodName)
+
+@login_required(login_url='login')
+def service(request, hood):
+    form = CreateService()
+    context = {'form': form}
+    return render(request, 'services.html', context)
+
+
+@login_required(login_url='login')
+def business(request, hood):
+    form = CreateBusiness()
+    context = {'form': form}
+    return render(request, 'business.html', context) 

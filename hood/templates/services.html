@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+	<div class="row my-4">
+		<div class="col-12 col-md-3">
+			<h2 class="text-light">Add a Service</h2>
+			<form action="" method="POST">
+				{% csrf_token %}
+				<div class="mb-3">
+					<label for="{{form.serviceName.auto_id}}" class="form-label text-light">
+						Name of Service
+					</label>
+					{{form.serviceName}}
+				</div>
+				<div class="mb-3">
+					<label for="{{form.servicePhone.auto_id}}" class="form-label text-light">
+						Phone
+					</label>
+					{{form.servicePhone}}
+				</div>
+                <div class="mb-3">
+					<label for="{{form.serviceEmail.auto_id}}" class="form-label text-light">
+						Email 
+					</label>
+					{{form.serviceEmail}}
+				</div>
+                <div class="mb-3">
+					<label for="{{form.serviceDescription.auto_id}}" class="form-label text-light">
+						Describe Type of Service
+					</label>
+					{{form.serviceDescription}}
+				</div>
+				<button type="submit" class="btn btn-primary shadow">Add</button>
+			</form>
+		</div>
+		<!-- <div class="col-12 col-md-8 ms-4">
+			<h2 class="text-light">Available Services in the Hood </h2>
+			<div>
+				{% if posts %} {% for post in posts %}
+				<div class="card">
+					<div class="card-header">{{post.title}}</div>
+					<div class="card-body">
+						<blockquote class="blockquote mb-0">
+							<p>{{post.postBody}}</p>
+							<footer class="blockquote-footer">
+								by
+								<cite title="Source Title">
+									{{post.postedBy.first_name}} {{post.postedBy.last_name}}
+								</cite>
+							</footer>
+						</blockquote>
+					</div>
+				</div>
+				{% endfor %} 
+                {% else %}
+                <div class="my-4">
+                    <p class="text-light text-center fs-3">
+                        No, Services in this Hood
+                    </p>
+                </div>
+                {% endif %}
+			</div>
+		</div> -->
+	</div>
+</div>
+{% endblock %}

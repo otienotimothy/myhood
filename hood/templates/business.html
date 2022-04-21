@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+	<div class="row my-4">
+		<div class="col-12 col-md-3">
+			<h2 class="text-light">Add Business</h2>
+			<form action="" method="POST">
+				{% csrf_token %}
+				<div class="mb-3">
+					<label for="{{form.businessName.auto_id}}" class="form-label text-light">
+						Business Name
+					</label>
+					{{form.businessName}}
+				</div>
+                <div class="mb-3">
+					<label for="{{form.businessPhone.auto_id}}" class="form-label text-light">
+						Business Phone Number
+					</label>
+					{{form.businessPhone}}
+				</div>
+                <div class="mb-3">
+					<label for="{{form.businessEmail.auto_id}}" class="form-label text-light">
+						Business Email Address
+					</label>
+					{{form.businessEmail}}
+				</div>
+				<div class="mb-3">
+					<label for="{{form.businessDescription.auto_id}}" class="form-label text-light">
+						Describe your Business
+					</label>
+					{{form.businessDescription}}
+				</div>
+				<button type="submit" class="btn btn-primary shadow">Add</button>
+			</form>
+		</div>
+		<!-- <div class="col-12 col-md-8 ms-4">
+			<h2 class="text-light">Available Businesses in the Hood</h2>
+			<div>
+				{% if posts %} {% for post in posts %}
+				<div class="card">
+					<div class="card-header">{{post.title}}</div>
+					<div class="card-body">
+						<blockquote class="blockquote mb-0">
+							<p>{{post.postBody}}</p>
+							<footer class="blockquote-footer">
+								by
+								<cite title="Source Title">
+									{{post.postedBy.first_name}} {{post.postedBy.last_name}}
+								</cite>
+							</footer>
+						</blockquote>
+					</div>
+				</div>
+				{% endfor %} 
+                {% else %}
+                <div class="my-4">
+                    <p class="text-light text-center fs-3">
+                        No, Businesses in this Hood
+                    </p>
+                </div>
+                {% endif %}
+			</div>
+		</div> -->
+	</div>
+</div>
+{% endblock %}

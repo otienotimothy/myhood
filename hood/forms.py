@@ -1,11 +1,9 @@
-from dataclasses import fields
-from pyexpat import model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import EmailInput, TextInput, PasswordInput, FileInput, Select
 
-from .models import Neighborhood, Post
+from .models import Business, Neighborhood, Post, Services
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -53,4 +51,29 @@ class createPost(forms.ModelForm):
         widgets = {
             'title': TextInput(attrs={'class': 'form-control'}),
             'postBody': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'})
+        }
+
+
+class CreateService(forms.ModelForm):
+    class Meta:
+        model = Services
+        fields = ['serviceName', 'servicePhone',
+                  'serviceEmail', 'serviceDescription']
+        widgets = {
+            'serviceName': TextInput(attrs={'class': 'form-control'}),
+            'serviceDescription': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'}),
+            'servicePhone': TextInput(attrs={'class': 'form-control'}),
+            'serviceEmail': TextInput(attrs={'class': 'form-control'}),
+        }
+
+
+class CreateBusiness(forms.ModelForm):
+    class Meta:
+        model = Business
+        fields = ['businessName', 'businessPhone', 'businessEmail', ]
+        widgets = {
+            'businessName': TextInput(attrs={'class': 'form-control'}),
+            'businessPhone': TextInput(attrs={'class': 'form-control'}),
+            'businessEmail': TextInput(attrs={'class': 'form-control'}),
+            'businessDescription': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'})
         }

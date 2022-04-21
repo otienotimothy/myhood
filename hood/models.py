@@ -7,7 +7,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = CloudinaryField('image')
     bio = models.CharField(max_length=255, null=True, blank=True)
-    hood = models.OneToOneField(
+    hood = models.ForeignKey(
         'Neighborhood', on_delete=models.SET_NULL, null=True)
 
 class Neighborhood(models.Model):

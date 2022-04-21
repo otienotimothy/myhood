@@ -27,7 +27,7 @@ class Business(models.Model):
     businessPhone = models.CharField(max_length=255, null=True)
     businessEmail = models.EmailField(null=True)
     bussinessDescription = models.TextField(null=True)
-    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='businesses')
     businessOwner = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Services(models.Model):
@@ -35,4 +35,4 @@ class Services(models.Model):
     servicePhone = models.CharField(max_length=255)
     serviceEmail = models.EmailField(max_length=200)
     serviceDescription = models.TextField(null=True)
-    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='services')

@@ -140,13 +140,18 @@ def joinHood(request):
 
 @login_required(login_url='login')
 def service(request, hood):
+    hood = Neighborhood.objects.get(neighborhoodName = hood)
+    services = hood.services.all()
+    print(services)
     form = CreateService()
-    context = {'form': form}
+    context = {'form': form, 'services': services}
     return render(request, 'services.html', context)
 
 
 @login_required(login_url='login')
 def business(request, hood):
+    hood = Neighborhood.objects.get(neighborhoodName=hood)
+    businesses = hood.services.all()
     form = CreateBusiness()
-    context = {'form': form}
+    context = {'form': form, 'businesses': businesses}
     return render(request, 'business.html', context) 

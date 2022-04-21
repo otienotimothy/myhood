@@ -70,7 +70,8 @@ class CreateService(forms.ModelForm):
 class CreateBusiness(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ['businessName', 'businessPhone', 'businessEmail', ]
+        fields = ['businessName', 'businessPhone',
+                  'businessEmail', 'bussinessDescription']
         widgets = {
             'businessName': TextInput(attrs={'class': 'form-control'}),
             'businessPhone': TextInput(attrs={'class': 'form-control'}),

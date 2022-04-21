@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from .models import Profile, Neighborhood
-from .forms import UserRegistrationForm, LoginUserForm, createJoinHoodForm
+from .forms import UserRegistrationForm, LoginUserForm, createJoinHoodForm, createPost
 
 # Create your views here.
 
@@ -76,7 +76,24 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def home(request, hood):
-    pass
+    form = createPost()
+
+    neighborhood = Neighborhood.objects.get(neighborhoodName = hood)
+
+    if request.method == 'POST':
+        form = createPost(request.POST)
+        if form.is_valid():
+            newPost = form.save(commit = False)
+            newPost.hood = neighborhood
+            newPost.PostedBy = request.user
+            newPost.save()
+            messages.success(request, 'Post Added Successfully')
+        else:
+            messages.error(request, 'An Error Occurred while uploading your post')
+
+    posts = neighborhood.posts.all()
+    context = {'posts': posts, 'form': form}
+    return render(request, 'home.html', context)
 
 @login_required(login_url='login')
 def createJoinHood(request):

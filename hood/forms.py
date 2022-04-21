@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms import EmailInput, TextInput, PasswordInput, FileInput, Select
 
-from .models import Neighborhood
+from .models import Neighborhood, Post
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -43,4 +43,14 @@ class createJoinHoodForm(forms.ModelForm):
         widgets = {
             'neighborhoodName': TextInput(attrs={'class': 'form-control'}),
             'location': TextInput(attrs={'class': 'form-control'})
+        }
+
+
+class createPost(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'postBody']
+        widgets = {
+            'title': TextInput(attrs={'class': 'form-control'}),
+            'postBody': forms.Textarea(attrs={'class': 'form-control', 'rows': '5'})
         }

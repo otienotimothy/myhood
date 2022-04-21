@@ -143,6 +143,15 @@ def service(request, hood):
     hood = Neighborhood.objects.get(neighborhoodName = hood)
     services = hood.services.all()
     print(services)
+
+    if request.method == 'POST':
+        form = CreateBusiness(request.POST)
+        if form.is_valid():
+            newService = form.save(commit=False)
+            newService.neighborhood = hood
+            newService.save()
+            messages.success(request, 'Service Added Successfully')
+
     form = CreateService()
     context = {'form': form, 'services': services}
     return render(request, 'services.html', context)
@@ -152,6 +161,16 @@ def service(request, hood):
 def business(request, hood):
     hood = Neighborhood.objects.get(neighborhoodName=hood)
     businesses = hood.services.all()
+
+    if request.method == 'POST':
+        form = CreateBusiness(request.POST)
+        if form.is_valid():
+            newBusiness = form.save(commit=False)
+            newBusiness.neighborhood = hood
+            newBusiness.save()
+            messages.success(request, 'Business Added Successfully')
+
+
     form = CreateBusiness()
     context = {'form': form, 'businesses': businesses}
     return render(request, 'business.html', context) 

@@ -64,9 +64,9 @@ def loginUser(request):
             except:
                 messages.error(request, 'User does not exist, sign-up')
 
-#     form = LoginUserForm()
-#     context = {'form': form}
-#     return render(request, 'login.html', context)
+    form = LoginUserForm()
+    context = {'form': form}
+    return render(request, 'login.html', context)
 
 
 # @login_required(login_url='login')

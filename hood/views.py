@@ -68,8 +68,7 @@ def loginUser(request):
     context = {'form': form}
     return render(request, 'login.html', context)
 
-
-# @login_required(login_url='login')
-# def logoutUser(request):
-#     logout(request)
-#     return redirect(loginUser)
+@login_required(login_url='login')
+def logoutUser(request):
+    logout(request)
+    return redirect(loginUser)

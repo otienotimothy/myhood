@@ -75,18 +75,49 @@ def logoutUser(request):
 
 
 @login_required(login_url='login')
-def home(request):
+def home(request, hood):
     pass
 
 @login_required(login_url='login')
 def createJoinHood(request):
 
-    try:
-        isMember = Neighborhood.objects.get(member = request.user)
+    neighborhoods = Neighborhood.objects.all()
+    print(neighborhoods)
+    
+    isMember = Neighborhood.objects.filter(member = request.user)
 
-        if isMember:
-           return redirect(home)
+    if isMember:
+        return redirect(home)
+    
+    form = createJoinHoodForm()
+    context = {'form': form, 'neighborhoods': neighborhoods}
+    return render(request, 'create_join_hood.html', context)
+
+@login_required(login_url='login')
+def createHood(request):
+    if request.method == 'POST':
+        form = createJoinHoodForm(request.POST)
+        if form.is_valid():
+            newHood = form.save(commit=False)
+            newHood.creator = request.user
+            newHood.member = request.user
+            newHood.save()
+            return redirect(home, hood = newHood.neighborhoodName)
+        
+        else:
+            return redirect(createJoinHood)
+
+
+@login_required(login_url='login')
+def joinHood(request):
+    hoodName = request.POST.get('hoodName') 
+
+    try:
+        hood = Neighborhood.objects.get(neighborhoodName = hoodName)
+        newHood = createJoinHoodForm(instance=hood)
+        newHood.member = request.user
+        newHood.save()
+        return redirect(home, hood= hoodName)
     except:
-        form = createJoinHoodForm()
-        context = {'form': form}
-        return render(request, 'create_join_hood.html', context)
+        messages.error(request, 'An Error Occurred while you were trying to join this neighborhood')
+        return redirect(createJoinHood)

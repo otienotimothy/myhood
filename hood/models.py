@@ -28,7 +28,7 @@ class Business(models.Model):
     businessEmail = models.EmailField(null=True)
     bussinessDescription = models.TextField(null=True)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='businesses')
-    businessOwner = models.ForeignKey(User, on_delete=models.CASCADE)
+    businessOwner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='biz')
 
 class Services(models.Model):
     serviceName = models.CharField(max_length=200)

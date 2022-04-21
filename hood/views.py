@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
-from .models import Profile, Neighborhood
+from .models import Post, Profile, Neighborhood
 from .forms import CreateBusiness, CreateService, UserRegistrationForm, LoginUserForm, CreateJoinHoodForm, CreatePost
 
 # Create your views here.
@@ -99,6 +99,14 @@ def home(request, hood):
         print(post.postedBy)
     context = {'posts': posts, 'form': form}
     return render(request, 'home.html', context)
+
+@login_required(login_url='login')
+def loadProfile(request):
+    print(request.user.biz.all())
+    posts = Post.objects.filter(postedBy= request.user)
+    print(posts)
+    context = {'posts': posts}
+    return render(request, 'profile.html', context)
 
 @login_required(login_url='login')
 def createJoinHood(request):

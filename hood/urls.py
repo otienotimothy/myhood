@@ -1,10 +1,11 @@
 from django.urls import path
 
-from .views import index, home, signupUser, loginUser, logoutUser, createJoinHood, createHood, joinHood, service, business
+from .views import index, home, signupUser, loginUser, logoutUser, loadProfile, createJoinHood, createHood, joinHood, service, business
 
 urlpatterns = [
     path('', index, name='index'),
     path('hood/<str:hood>/', home, name='home' ),
+    path('profile', loadProfile, name='profile'),
     path('signup/', signupUser, name='signup'),
     path('login/', loginUser, name='login'),
     path('logout/', logoutUser, name='logout'),

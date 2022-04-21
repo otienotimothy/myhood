@@ -1,0 +1,148 @@
+{% extends 'base.html' %} {% block content %}
+<section class="h-100 gradient-custom-2">
+	<div class="container py-5 h-100">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col col-lg-9 col-xl-7">
+				<div class="card shadow">
+					<div
+						class="rounded-top text-white d-flex flex-row"
+						style="background-color: #102340; height: 200px"
+					>
+						<div class="ms-4 mt-5 d-flex flex-column" style="width: 150px">
+							<img
+								src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+								alt="Generic placeholder image"
+								class="img-fluid img-thumbnail mt-4 mb-2"
+								style="width: 150px; z-index: 1"
+							/>
+							<button
+								type="button"
+								class="btn btn-outline-dark"
+								data-mdb-ripple-color="dark"
+								style="z-index: 1"
+							>
+								Edit profile
+							</button>
+						</div>
+						<div class="ms-3" style="margin-top: 130px">
+							<h5>{{ user.first_name }} {{user.last_name}}</h5>
+							<p> {{user.profile.hood.neighborhoodName}} </p>
+						</div>
+					</div>
+					<div class="p-4 text-black" style="background-color: #f8f9fa">
+						<div class="d-flex justify-content-end text-center py-1">
+							<div class="px-3">
+								<p class="mb-1 h5"> {{posts | length}} </p>
+								<p class="small text-muted mb-0"> Posts </p>
+							</div>
+							<div>
+								<p class="mb-1 h5"> {{ user.biz.all | length }} </p>
+								<p class="small text-muted mb-0">Businesses</p>
+							</div>
+						</div>
+					</div>
+					<div class="card-body p-4 text-black">
+						<div class="mb-5">
+							<p class="lead fw-normal mb-1">About</p>
+							<div class="p-4" style="background-color: #f8f9fa">
+								{% if user.profile.bio %}
+								<p class="font-italic mb-1"> {{user.profile.bio}} </p>
+								{% else %}
+								<p class="font-italic mb-1">Lives in {{user.profile.hood.neighborhoodName}} </p>
+								{% endif %}
+							</div>
+						</div>
+						<hr />
+						<div class="accordion" id="accordionExample">
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingOne">
+									<button
+										class="accordion-button"
+										type="button"
+										data-bs-toggle="collapse"
+										data-bs-target="#collapseOne"
+										aria-expanded="true"
+										aria-controls="collapseOne"
+									>
+										My Posts
+									</button>
+								</h2>
+								<div
+									id="collapseOne"
+									class="accordion-collapse collapse show"
+									aria-labelledby="headingOne"
+									data-bs-parent="#accordionExample"
+								>
+									{% if posts %} {% for post in posts %}
+
+									<div class="card my-3">
+										<div class="card-header">{{post.title}}</div>
+										<div class="card-body">
+											<blockquote class="blockquote mb-0">
+												<p>{{post.postBody}}</p>
+												<footer class="blockquote-footer">
+													by
+													<cite title="Source Title">
+														{{post.postedBy.first_name}}
+														{{post.postedBy.last_name}}
+													</cite>
+												</footer>
+											</blockquote>
+										</div>
+									</div>
+									{% endfor %} {% else %}
+									<div class="my-3">
+										<p class="text-center">Add Posts to display them here...</p>
+									</div>
+									{% endif %}
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingTwo">
+									<button
+										class="accordion-button collapsed"
+										type="button"
+										data-bs-toggle="collapse"
+										data-bs-target="#collapseTwo"
+										aria-expanded="false"
+										aria-controls="collapseTwo"
+									>
+										My Businessess
+									</button>
+								</h2>
+								<div
+									id="collapseTwo"
+									class="accordion-collapse collapse"
+									aria-labelledby="headingTwo"
+									data-bs-parent="#accordionExample"
+								>
+									{% if user.biz.all %} {% for biz in user.biz.all %}
+									<div class="card my-4">
+										<div class="card-header">{{business.businessName}}</div>
+										<div class="card-body">
+											<p class="mt-3">{{business.bussinessDescription }}</p>
+											<p class="mt-3">
+												<strong>Email</strong>: {{business.businessPhone}}
+											</p>
+											<p class="mt-3">
+												<strong>Phone</strong>: {{business.businessEmail}}
+											</p>
+										</div>
+									</div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <div class="my-3">
+										<p class="text-center">Add Business to display them here...</p>
+									</div>
+                                    {% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

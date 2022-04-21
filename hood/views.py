@@ -16,7 +16,7 @@ def index(request):
 
 def signupUser(request):
     if request.user.is_authenticated:
-        redirect('home')
+       return redirect(createJoinHood)
 
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
@@ -35,7 +35,7 @@ def signupUser(request):
                 userProfile = Profile(user=user)
                 userProfile.save()
                 login(request, user)
-                return redirect('home')
+                return redirect(createJoinHood)
 
     form = UserRegistrationForm()
     context = {'form': form}
@@ -44,7 +44,7 @@ def signupUser(request):
 
 def loginUser(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('create-join-hood')
 
     if request.method == 'POST':
         form = LoginUserForm(request.POST)
@@ -58,7 +58,7 @@ def loginUser(request):
                         request, username=username, password=password)
                     if user:
                         login(request, user)
-                        return redirect('home')
+                        return redirect('create-join-hood')
                     else:
                         messages.error(request, 'Invalid username or password')
             except:
@@ -81,12 +81,12 @@ def home(request):
 @login_required(login_url='login')
 def createJoinHood(request):
 
-    isMember = Neighborhood.objects.get(member = request.user)
-    isCreator = Neighborhood.objects.get(creator = request.user)
+    try:
+        isMember = Neighborhood.objects.get(member = request.user)
 
-    if isMember or isCreator:
-        redirect(home)
-
-    form = createJoinHoodForm()
-    context = {'form': form}
-    return render(request, 'create_join_hood.html', context)
+        if isMember:
+           return redirect(home)
+    except:
+        form = createJoinHoodForm()
+        context = {'form': form}
+        return render(request, 'create_join_hood.html', context)

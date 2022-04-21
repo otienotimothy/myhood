@@ -24,16 +24,16 @@
 				<p class="text-light text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Hood</p>
 				<form action="/create-hood">
 					<div class="mb-3">
-						<label for="exampleInputPassword1" class="text-light form-label">
+						<label for={{form.neighborhoodName.auto_id}} class="text-light form-label">
                             Hood Name
                         </label>
-						<input type="text" class="form-control" />
+						{{form.neighborhoodName}}
 					</div>
 					<div class="mb-3">
-						<label for="exampleInputPassword1" class="text-light form-label">
+						<label for={{form.location.auto_id}} class="text-light form-label">
                             Hood Location
                         </label>
-						<input type="text" class="form-control" />
+						{{form.location}}
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>

@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from .models import Profile
-from .forms import UserRegistrationForm, LoginUserForm
+from .forms import UserRegistrationForm, LoginUserForm, createJoinHoodForm
 
 # Create your views here.
 
@@ -74,4 +74,6 @@ def logoutUser(request):
     return redirect(loginUser)
 
 def createJoinHood(request):
-    return render(request, 'create_join_hood.html')
+    form = createJoinHoodForm()
+    context = {'form': form}
+    return render(request, 'create_join_hood.html', context)

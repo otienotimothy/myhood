@@ -12,6 +12,8 @@ from .forms import CreateBusiness, CreateService, UserRegistrationForm, LoginUse
 
 
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('home', hood=request.user.profile.hood.neighborhoodName)
     return render(request, 'index.html')
 
 

@@ -25,17 +25,17 @@
 			<!-- Left links -->
 			<ul class="navbar-nav ms-auto me-3 mb-2 mb-lg-0">
 				<li class="nav-item">
-					<a class="nav-link" href="#">
+					<a class="nav-link" href="{% url 'home' user.profile.hood.neighborhoodName %}">
 						<i class="fa-solid fa-house"></i>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">
+					<a class="nav-link" href="{% url 'business' user.profile.hood.neighborhoodName %}">
 						<i class="fa-solid fa-store"></i>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">
+					<a class="nav-link" href="{% url 'service' user.profile.hood.neighborhoodName %}">
 						<i class="fa-solid fa-people-group"></i>
 					</a>
 				</li>

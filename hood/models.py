@@ -13,7 +13,7 @@ class Profile(models.Model):
 class Neighborhood(models.Model):
     neighborhoodName = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
-    creator = models.OneToOneField(
+    creator = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, related_name='hoodCreator')
 
 class Post(models.Model):

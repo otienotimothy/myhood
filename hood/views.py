@@ -1,4 +1,4 @@
-from multiprocessing import context
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -91,7 +91,7 @@ def home(request, hood):
             messages.success(request, 'Post Added Successfully')
         else:
             messages.error(request, 'An Error Occurred while uploading your post')
-
+    print(request.user.profile.hood)
     posts = neighborhood.posts.all()
     context = {'posts': posts, 'form': form}
     return render(request, 'home.html', context)
@@ -112,12 +112,15 @@ def createJoinHood(request):
 
 @login_required(login_url='login')
 def createHood(request):
+    userProfile = Profile.objects.get(user=request.user) 
     if request.method == 'POST':
         form = createJoinHoodForm(request.POST)
         if form.is_valid():
             newHood = form.save(commit=False)
             newHood.creator = request.user
             newHood.save()
+            userProfile.hood = newHood
+            userProfile.save()
             return redirect(home, hood = newHood.neighborhoodName)
         
         else:

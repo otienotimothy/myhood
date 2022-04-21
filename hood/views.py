@@ -169,13 +169,14 @@ def service(request, hood):
 @login_required(login_url='login')
 def business(request, hood):
     hood = Neighborhood.objects.get(neighborhoodName=hood)
-    businesses = hood.services.all()
+    businesses = hood.businesses.all()
 
     if request.method == 'POST':
         form = CreateBusiness(request.POST)
         if form.is_valid():
             newBusiness = form.save(commit=False)
             newBusiness.neighborhood = hood
+            newBusiness.businessOwner = request.user
             newBusiness.save()
             messages.success(request, 'Business Added Successfully')
 

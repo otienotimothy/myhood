@@ -36,12 +36,12 @@
 			<h2 class="text-light">Available Services in the Hood </h2>
 			<div>
 				{% if services %} {% for service in services %}
-				<div class="card">
+				<div class="card my-4">
 					<div class="card-header">{{service.serviceName}}</div>
 					<div class="card-body">
 						<p>{{service.serviceDescription}}</p>
-						<p>{{service.serviceEmail}}</p>
-						<p>{{service.servicePhone}}</p>
+						<p><strong>Email</strong> : {{service.serviceEmail}}</p>
+						<p><strong>Phone</strong> : {{service.servicePhone}}</p>
 					</div>
 				</div>
 				{% endfor %} 

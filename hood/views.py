@@ -72,3 +72,6 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return redirect(loginUser)
+
+def createJoinHood(request):
+    return render(request, 'create_join_hood.html')

@@ -83,12 +83,9 @@ def createJoinHood(request):
 
     neighborhoods = Neighborhood.objects.all()
     print(neighborhoods)
-    
-    isMember = Neighborhood.objects.filter(member = request.user)
 
-    if isMember:
-        for hood in isMember:
-            hoodName = hood.neighborhoodName
+    if request.user.profile.hood:
+        hoodName = request.user.profile.hood.neighborhoodName
         return redirect(home, hoodName)
     
     form = createJoinHoodForm()
@@ -102,7 +99,6 @@ def createHood(request):
         if form.is_valid():
             newHood = form.save(commit=False)
             newHood.creator = request.user
-            newHood.member = request.user
             newHood.save()
             return redirect(home, hood = newHood.neighborhoodName)
         
@@ -112,14 +108,14 @@ def createHood(request):
 
 @login_required(login_url='login')
 def joinHood(request):
-    hoodName = request.POST.get('hoodName') 
+    print('being called...')
+    if request.method == 'POST':
+        hoodObj = request.POST.dict()
+        hoodName = hoodObj.get('hoodName')
 
-    try:
         hood = Neighborhood.objects.get(neighborhoodName = hoodName)
-        newHood = createJoinHoodForm(instance=hood)
-        newHood.member = request.user
-        newHood.save()
+        userProfile = Profile(user = request.user)
+        userProfile.hood = hood
+        userProfile.save()
+        
         return redirect(home, hood= hoodName)
-    except:
-        messages.error(request, 'An Error Occurred while you were trying to join this neighborhood')
-        return redirect(createJoinHood)

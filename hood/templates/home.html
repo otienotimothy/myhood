@@ -1,5 +1,53 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<h1>Hello From Home</h1>
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+	<div class="row my-4">
+		<div class="col-12 col-md-3">
+			<h2 class="text-light">Add Post</h2>
+			<form action="" method="POST">
+				{% csrf_token %}
+				<div class="mb-3">
+					<label for="{{form.title.auto_id}}" class="form-label text-light">
+						Title
+					</label>
+					{{form.title}}
+				</div>
+				<div class="mb-3">
+					<label for="{{form.postBody.auto_id}}" class="form-label text-light">
+						Post
+					</label>
+					{{form.postBody}}
+				</div>
+				<button type="submit" class="btn btn-primary shadow">Post</button>
+			</form>
+		</div>
+		<div class="col-12 col-md-8 ms-4">
+			<h2 class="text-light">What's Happening ?</h2>
+			<div>
+				{% if posts %} {% for post in posts %}
+				<div class="card">
+					<div class="card-header">{{post.title}}</div>
+					<div class="card-body">
+						<blockquote class="blockquote mb-0">
+							<p>{{post.postBody}}</p>
+							<footer class="blockquote-footer">
+								by
+								<cite title="Source Title">
+									{{post.postedBy.first_name}} {{post.postedBy.last_name}}
+								</cite>
+							</footer>
+						</blockquote>
+					</div>
+				</div>
+				{% endfor %} 
+                {% else %}
+                <div class="my-4">
+                    <p class="text-light text-center fs-3">
+                        No, Posts in this Hood
+                    </p>
+                </div>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

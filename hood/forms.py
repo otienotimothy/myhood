@@ -11,8 +11,10 @@ from .models import Neighborhood
 class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'username', 'email', 'password1', 'password2']
         widgets = {
+            'first_name': TextInput(attrs={'class': 'form-control'}),
+            'last_name': TextInput(attrs={'class': 'form-control'}),
             'username': TextInput(attrs={'class': 'form-control'}),
             'email': EmailInput(attrs={'class': 'form-control'})
         }

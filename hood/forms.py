@@ -1,7 +1,11 @@
+from dataclasses import fields
+from pyexpat import model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from django.forms import EmailInput, TextInput, PasswordInput, FileInput, Select
+
+from .models import Neighborhood
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -28,3 +32,13 @@ class LoginUserForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['password'].widget.attrs['class'] = 'form-control'
+
+
+class createJoinHoodForm(forms.ModelForm):
+    class Meta:
+        model = Neighborhood
+        fields = ['neighborhoodName', 'location']
+        widgets = {
+            'neighborhoodName': TextInput(attrs={'class': 'form-control'}),
+            'location': TextInput(attrs={'class': 'form-control'})
+        }

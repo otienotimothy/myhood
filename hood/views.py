@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
-from .models import Profile
+from .models import Profile, Neighborhood
 from .forms import UserRegistrationForm, LoginUserForm, createJoinHoodForm
 
 # Create your views here.
@@ -73,7 +73,20 @@ def logoutUser(request):
     logout(request)
     return redirect(loginUser)
 
+
+@login_required(login_url='login')
+def home(request):
+    pass
+
+@login_required(login_url='login')
 def createJoinHood(request):
+
+    isMember = Neighborhood.objects.get(member = request.user)
+    isCreator = Neighborhood.objects.get(creator = request.user)
+
+    if isMember or isCreator:
+        redirect(home)
+
     form = createJoinHoodForm()
     context = {'form': form}
     return render(request, 'create_join_hood.html', context)

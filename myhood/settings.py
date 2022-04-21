@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from ctypes import cast
 from pathlib import Path
 import dj_database_url
 from decouple import config, Csv
@@ -36,7 +37,7 @@ DEBUG = config('DEBUG', cast=bool)
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = config('HOSTS')
+    ALLOWED_HOSTS = config('HOSTS', cast=Csv())
 
 
 # Application definition

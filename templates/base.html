@@ -21,11 +21,28 @@
 			referrerpolicy="no-referrer"
 		/>
 		<!-- Custom Css -->
-		<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 		<title>MyHood</title>
 	</head>
-	<body style="background-color: #0B192E;">
-		{% include 'navbar.html' %} {% block content %} {% endblock %}
+	<body style="background-color: #0b192e">
+		{% include 'navbar.html' %} {% if messages %} {% for message in messages %}
+		{% if message.level_tag == 'error' %}
+		<div
+			class="alert alert-danger alter-dismissible fade show d-flex align-items-center justify-content-between"
+			role="alert"
+		>
+			{{ message }}
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+		{% else %}
+		<div
+			class="alert alert-success alter-dismissible fade show d-flex align-items-center justify-content-between"
+			role="alert"
+		>
+			{{ message }}
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+		{% endif %} {% endfor %} {% endif %} {% block content %} {% endblock %}
 		<!-- JavaScript Bundle with Popper -->
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

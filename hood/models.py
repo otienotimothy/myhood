@@ -7,13 +7,14 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = CloudinaryField('image')
     bio = models.CharField(max_length=255, null=True, blank=True)
+    hood = models.OneToOneField(
+        'Neighborhood', on_delete=models.SET_NULL, null=True)
 
 class Neighborhood(models.Model):
     neighborhoodName = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     creator = models.OneToOneField(
         User, on_delete=models.SET_NULL, null=True, related_name='hoodCreator')
-    member = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, related_name='hoodMember')
 
 class Post(models.Model):
     title = models.CharField(max_length=200)

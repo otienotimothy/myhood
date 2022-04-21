@@ -1,50 +1,106 @@
-{% extends 'base.html' %} {% block content %}
-
-<div
-	style="height: 100vh;"
-	class="container d-flex align-items-center justify-content-center"
->
-	<div style="background-color: #102340; border-radius: 1.2rem;" class="w-100 py-3 shadow ">
-		<div class="d-flex align-items-center justify-content-around">
-			<div >
-				<p class="text-light text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Join Hood</p>
-				<form action="/join-hood/" method="POST">
-					{% csrf_token %}
-					<div class="mb-3">
-						<select name="hoodName" class="form-select" aria-label="Default select example">
-							{% if neighborhoods %}
-							{% for hood in neighborhoods %}
-							<option value={{hood.neighborhoodName}}> {{hood.neighborhoodName}} </option>
-							{% endfor %}
-							{% else %}
-							<option class="text-dark" value="#" > No Neighborhoods, Available </option>
-							{% endif %}
-						</select>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- CSS only -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+			crossorigin="anonymous"
+		/>
+		<!-- FontAwsome -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+			integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+		<!-- Custom Css -->
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+		<title>MyHood</title>
+	</head>
+	<body style="background-color: #0b192e">
+		<div
+			style="height: 100vh"
+			class="container d-flex align-items-center justify-content-center"
+		>
+			<div
+				style="background-color: #102340; border-radius: 1.2rem"
+				class="w-100 py-3 shadow"
+			>
+				<div class="d-flex align-items-center justify-content-around">
+					<div>
+						<p class="text-light text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+							Join Hood
+						</p>
+						<form action="/join-hood/" method="POST">
+							{% csrf_token %}
+							<div class="mb-3">
+								<select
+									name="hoodName"
+									class="form-select"
+									aria-label="Default select example"
+								>
+									{% if neighborhoods %} {% for hood in neighborhoods %}
+									<option value="{{hood.neighborhoodName}}">
+										{{hood.neighborhoodName}}
+									</option>
+									{% endfor %} {% else %}
+									<option class="text-dark" value="#">
+										No Neighborhoods, Available
+									</option>
+									{% endif %}
+								</select>
+							</div>
+							<button
+								type="submit"
+								class="btn btn-primary"
+								{%if
+								not
+								neighborhoods%}
+								disabled
+								{%
+								endif
+								%}
+							>
+								Submit
+							</button>
+						</form>
 					</div>
-					<button type="submit" class="btn btn-primary" {%if not neighborhoods%} disabled {% endif %} >Submit</button>
-				</form>
-			</div>
-			<div>
-				<p class="text-light text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Hood</p>
-				<form action="/create-hood/" method="POST">
-					{% csrf_token %}
-					<div class="mb-3">
-						<label for={{form.neighborhoodName.auto_id}} class="text-light form-label">
-                            Hood Name
-                        </label>
-						{{form.neighborhoodName}}
+					<div>
+						<p class="text-light text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+							Create Hood
+						</p>
+						<form action="/create-hood/" method="POST">
+							{% csrf_token %}
+							<div class="mb-3">
+								<label
+									for="{{form.neighborhoodName.auto_id}}"
+									class="text-light form-label"
+								>
+									Hood Name
+								</label>
+								{{form.neighborhoodName}}
+							</div>
+							<div class="mb-3">
+								<label
+									for="{{form.location.auto_id}}"
+									class="text-light form-label"
+								>
+									Hood Location
+								</label>
+								{{form.location}}
+							</div>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
 					</div>
-					<div class="mb-3">
-						<label for={{form.location.auto_id}} class="text-light form-label">
-                            Hood Location
-                        </label>
-						{{form.location}}
-					</div>
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</form>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
-
-{% endblock %}
+	</body>
+</html>

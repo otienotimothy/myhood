@@ -6,7 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from .models import Profile, Neighborhood
-from .forms import CreateBusiness, CreateService, UserRegistrationForm, LoginUserForm, createJoinHoodForm, createPost
+from .forms import CreateBusiness, CreateService, UserRegistrationForm, LoginUserForm, CreateJoinHoodForm, CreatePost
 
 # Create your views here.
 
@@ -79,22 +79,24 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def home(request, hood):
-    form = createPost()
+    form = CreatePost()
 
     neighborhood = Neighborhood.objects.get(neighborhoodName = hood)
 
     if request.method == 'POST':
-        form = createPost(request.POST)
+        form = CreatePost(request.POST)
         if form.is_valid():
             newPost = form.save(commit = False)
             newPost.hood = neighborhood
-            newPost.PostedBy = request.user
+            newPost.postedBy_id = request.user.id
             newPost.save()
             messages.success(request, 'Post Added Successfully')
         else:
             messages.error(request, 'An Error Occurred while uploading your post')
     print(request.user.profile.hood)
     posts = neighborhood.posts.all()
+    for post in posts:
+        print(post.postedBy)
     context = {'posts': posts, 'form': form}
     return render(request, 'home.html', context)
 
@@ -104,11 +106,11 @@ def createJoinHood(request):
     neighborhoods = Neighborhood.objects.all()
     print(neighborhoods)
 
-    if request.user.profile.hood:
+    if request.user.is_authenticated and request.user.profile.hood:
         hoodName = request.user.profile.hood.neighborhoodName
         return redirect(home, hoodName)
     
-    form = createJoinHoodForm()
+    form = CreateJoinHoodForm()
     context = {'form': form, 'neighborhoods': neighborhoods}
     return render(request, 'create_join_hood.html', context)
 
@@ -116,7 +118,7 @@ def createJoinHood(request):
 def createHood(request):
     userProfile = Profile.objects.get(user=request.user) 
     if request.method == 'POST':
-        form = createJoinHoodForm(request.POST)
+        form = CreateJoinHoodForm(request.POST)
         if form.is_valid():
             newHood = form.save(commit=False)
             newHood.creator = request.user
@@ -150,12 +152,14 @@ def service(request, hood):
     print(services)
 
     if request.method == 'POST':
-        form = CreateBusiness(request.POST)
+        form = CreateService(request.POST)
         if form.is_valid():
             newService = form.save(commit=False)
             newService.neighborhood = hood
             newService.save()
             messages.success(request, 'Service Added Successfully')
+        else:
+            messages.error(request, 'An Error occurred while creating a service...')
 
     form = CreateService()
     context = {'form': form, 'services': services}

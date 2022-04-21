@@ -10,6 +10,7 @@ dj-database-url = "*"
 whitenoise = "*"
 cloudinary = "*"
 psycopg2 = "*"
+gunicorn = "*"
 
 [dev-packages]
 autopep8 = "*"
